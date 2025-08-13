@@ -10,7 +10,8 @@ import bannerImage from "../assets/banner.jpg";
 import "./Home.css";
 import ProductCard from "./ProductCard";
 import RollingPaperTobacco from "./products";
-import Categories from "../Categories";
+import Categories from "./Categories";
+
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -142,7 +143,6 @@ const Home = () => {
     </Button>
   </div>
 
-  {/* Sort Section */}
   <div className="d-flex gap-2 align-items-center bg-white p-2 rounded-4 shadow-sm">
     <select
       value={sortOption}
@@ -151,12 +151,12 @@ const Home = () => {
       style={{ minWidth: "200px" }}
     >
       <option value="">Sort By</option>
-      <option value="title,asc">📄 Title ↑ (A-Z)</option>
-      <option value="title,desc">📄 Title ↓ (Z-A)</option>
-      <option value="price,asc">💰 Price ↑ (Low → High)</option>
-      <option value="price,desc">💰 Price ↓ (High → Low)</option>
-      <option value="category,asc">📂 Category ↑ (A-Z)</option>
-      <option value="category,desc">📂 Category ↓ (Z-A)</option>
+      <option value="title,asc"> Title ↑ (A-Z)</option>
+      <option value="title,desc"> Title ↓ (Z-A)</option>
+      <option value="price,asc"> Price ↑ (Low → High)</option>
+      <option value="price,desc">Price ↓ (High → Low)</option>
+      <option value="category,asc">Category ↑ (A-Z)</option>
+      <option value="category,desc"> Category ↓ (Z-A)</option>
     </select>
     <Button
       variant="success"
@@ -179,7 +179,7 @@ const Home = () => {
           }}
         />
       </div>
- <Categories/>
+<Categories/>
       <Container>
         
         <ProductCard />
