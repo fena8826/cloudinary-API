@@ -10,6 +10,7 @@ import bannerImage from "../assets/banner.jpg";
 import "./Home.css";
 import ProductCard from "./ProductCard";
 import RollingPaperTobacco from "./products";
+import Categories from "../Categories";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -178,10 +179,12 @@ const Home = () => {
           }}
         />
       </div>
-
+ <Categories/>
       <Container>
+        
         <ProductCard />
         <RollingPaperTobacco />
+       
 
         <h2 className="mb-4 text-center fw-bold text-success">All Products</h2>
 
