@@ -18,6 +18,8 @@ const AddProduct = () => {
     title: "",
     desc: "",
     price: "",
+      brand: "",   
+  stock: "",  
     category: "",
     image: "",
   };
@@ -46,6 +48,8 @@ const AddProduct = () => {
     if (!inputForm.category || inputForm.category === "Select Category")
       newErrors.category = "Please select a valid category";
     if (!inputForm.image.trim()) newErrors.image = "Image URL is required";
+      if (!inputForm.brand.trim()) newErrors.brand = "Brand is required"; 
+  if (!inputForm.stock) newErrors.stock = "Stock is required"; 
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -148,6 +152,41 @@ const AddProduct = () => {
             </Form.Control.Feedback>
           </Col>
         </Form.Group>
+   
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">Brand</Form.Label>
+                  <Col sm="10">
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Brand Name"
+                      name="brand"
+                      value={inputForm.brand}
+                      onChange={handleChanged}
+                      isInvalid={!!errors.brand}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.brand}
+                    </Form.Control.Feedback>
+                  </Col>
+                </Form.Group>
+
+        
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">Stock</Form.Label>
+                  <Col sm="10">
+                    <Form.Control
+                      type="number"
+                      placeholder="Enter Stock Quantity"
+                      name="stock"
+                      value={inputForm.stock}
+                      onChange={handleChanged}
+                      isInvalid={!!errors.stock}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.stock}
+                    </Form.Control.Feedback>
+                  </Col>
+                </Form.Group>
 
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Image</Form.Label>

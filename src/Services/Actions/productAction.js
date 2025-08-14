@@ -77,7 +77,7 @@ export const addProductAsync = (data) => {
         dispatch(loading());
         try {
            
-            let res = await setDoc(doc(db, "products", data.id), data);     ID
+            let res = await setDoc(doc(db, "products", data.id), data);    
         
             dispatch(addProductSUC());
         } catch (error) {
