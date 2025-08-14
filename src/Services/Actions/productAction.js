@@ -1,4 +1,6 @@
-import axios from 'axios';
+
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 
 export const loading = () => {
     return {
@@ -50,15 +52,18 @@ export const updateProduct = () => {
 }
 
 
-// async action
-// get all product
+
 export const getAllProductAsync = () => {
     return async(dispatch) => {
         dispatch(loading());
-        try {
-            let res = await axios.get('http://localhost:3000/products') 
-            // console.log(res.data);
-            dispatch(getAllProducts(res.data));
+        try { 
+            let result = [];
+            let resRef = await getDocs(collection(db, 'products'));
+            resRef.forEach((doc) => {
+                result.push({...doc.data(), id: doc.id});
+            });
+
+            dispatch(getAllProducts(result));
         } catch (error) {
             console.log(error);
             dispatch(getProductsRej(error.message))
@@ -67,13 +72,13 @@ export const getAllProductAsync = () => {
     }
 }
 
-// add new product
 export const addProductAsync = (data) => {
     return async(dispatch) => {
         dispatch(loading());
         try {
-            let res = await axios.post('http://localhost:3000/products', data) 
-            // console.log(res);
+           
+            let res = await setDoc(doc(db, "products", data.id), data);     ID
+        
             dispatch(addProductSUC());
         } catch (error) {
             console.log(error);
@@ -82,13 +87,12 @@ export const addProductAsync = (data) => {
     }
 }
 
-// delete product
+
 export const deleteProductAsync = (id) => {
     return async(dispatch) => {
         dispatch(loading());
         try {
-            let res = await axios.delete(`http://localhost:3000/products/${id}`) 
-            // console.log(res);
+            await deleteDoc(doc(db, "products", id));
             dispatch(getAllProductAsync());
         } catch (error) {
             console.log(error);
@@ -97,14 +101,14 @@ export const deleteProductAsync = (id) => {
     }
 }
 
-// get single product
+
 export const getProductAsync = (id) => {
     return async(dispatch) => {
         dispatch(loading());
         try {
-            let res = await axios.get(`http://localhost:3000/products/${id}`) 
-            // console.log(res);
-            dispatch(getProduct(res.data));
+            let res = await getDoc(doc(db, "products", id));
+            console.log(res);
+            dispatch(getProduct({...res.data(), id: res.id}));
         } catch (error) {
             console.log(error);
             dispatch(addProductRej(error.message))
@@ -112,13 +116,13 @@ export const getProductAsync = (id) => {
     }
 }
 
-// update prpduct
+
 export const updateProductAsync = (data) => {
     return async(dispatch) => {
         dispatch(loading());
         try {
-            let res = await axios.put(`http://localhost:3000/products/${data.id}`, data) 
-            // console.log(res);
+            await updateDoc(doc(db, "products", data.id), data)
+      
             dispatch(updateProduct());
         } catch (error) {
             console.log(error);
