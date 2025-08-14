@@ -79,6 +79,14 @@
       "price": "500",
       "category": "Snacks & Munchies",
       "image": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/assets/search/usecase/banner/barnyard_millet_uttapam_01.png"
+    },
+    {
+      "id": "265853",
+      "title": "weerer",
+      "desc": "sdfawe",
+      "price": "234",
+      "category": "Cold Drinks & Juices",
+      "image": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=270/assets/search/usecase/banner/angoori_rasmalai_01.png"
     }
   ]
 }
