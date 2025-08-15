@@ -1,32 +1,37 @@
-const initalState = {
-    products:  [],
+const initialState = {
+    products: [],
     product: null,
     isLoading: false,
     isError: "",
     isCreated: false,
     isUpdated: false
-}
+};
 
+export const productReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case "LOADING":
+            return {
+                ...state,
+                isLoading: true
+            };
 
-export const productReducer = (state = initalState, action) => {
-    switch(action.type){
-        case "LOADING": 
-        return {
-            ...state,
-            isLoading: true
-        }
         case "ADD_PRODUCT_SUC":
             return {
                 ...state,
-                isCreated: true
+                isCreated: true,
+                isLoading: false,
+                products: [...state.products, action.payload],
+                isError: ""
             };
+
         case "ADD_PRODUCT_REJ":
             return {
                 ...state,
+                isLoading: false,
                 isError: action.payload
             };
-        
-        case "GET_ALL_PRODUCTS_SUC": 
+
+        case "GET_ALL_PRODUCTS_SUC":
             return {
                 ...state,
                 products: action.payload,
@@ -34,30 +39,31 @@ export const productReducer = (state = initalState, action) => {
                 isCreated: false,
                 isUpdated: false,
                 isError: ""
-            }
-        
-        case "GET_ALL_PRODUCTS_REJ": 
+            };
+
+        case "GET_ALL_PRODUCTS_REJ":
             return {
                 ...state,
                 isLoading: false,
                 isCreated: false,
                 isUpdated: false,
                 isError: action.payload
-            }
+            };
 
         case "GET_PRODUCT":
             return {
                 ...state,
                 product: action.payload
-            }
-        
+            };
+
         case "UPDATE_PRODUCT":
             return {
                 ...state,
                 product: null,
-                isUpdated: true,
-            }
+                isUpdated: true
+            };
+
         default:
             return state;
     }
-}
+};

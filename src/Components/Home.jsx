@@ -12,7 +12,6 @@ import ProductCard from "./ProductCard";
 import RollingPaperTobacco from "./products";
 import Categories from "./Categories";
 
-
 const Home = () => {
   const dispatch = useDispatch();
   const { products, isLoading } = useSelector((state) => state.productReducer);
@@ -56,7 +55,8 @@ const Home = () => {
       (p) =>
         p.title.toLowerCase().includes(lower) ||
         p.category.toLowerCase().includes(lower) ||
-        p.price.toString().includes(lower)
+        p.price.toString().includes(lower) ||
+        (p.brand && p.brand.toLowerCase().includes(lower))
     );
     setFilteredProducts(result);
     setItemOffset(0);
@@ -97,76 +97,78 @@ const Home = () => {
 
   return (
     <>
-  
-    <div
-  className="search-sort-container d-flex flex-wrap gap-4 mb-4 mt-4 justify-content-center align-items-center p-3 rounded-4 shadow-sm"
-  style={{ background: "linear-gradient(135deg, #e9fbe9, #f7fff7)" }}
->
+      <div
+        className="search-sort-container d-flex flex-wrap gap-4 mb-4 mt-4 justify-content-center align-items-center p-3 rounded-4 shadow-sm"
+        style={{ background: "linear-gradient(135deg, #e9fbe9, #f7fff7)" }}
+      >
+ 
+        <div className="d-flex gap-2 align-items-center bg-white p-2 rounded-4 shadow-sm">
+          <div className="position-relative">
+            <FaSearch
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "10px",
+                transform: "translateY(-50%)",
+                color: "#28a745",
+              }}
+            />
+            <input
+              type="text"
+              placeholder="Search by title, category, brand, or price"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="form-control border-0 ps-5 rounded-4"
+              style={{
+                minWidth: "250px",
+                background: "transparent",
+                boxShadow: "none",
+              }}
+            />
+          </div>
+          <Button
+            variant="success"
+            className="rounded-4 px-3 d-flex align-items-center gap-2"
+            onClick={handleSearch}
+          >
+            <FaSearch /> Search
+          </Button>
+          <Button
+            variant="outline-success"
+            className="rounded-4 px-3 d-flex align-items-center gap-2"
+            onClick={handleClearSearch}
+          >
+            <FaTimes /> Clear
+          </Button>
+        </div>
 
-  <div className="d-flex gap-2 align-items-center bg-white p-2 rounded-4 shadow-sm">
-    <div className="position-relative">
-      <FaSearch
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "10px",
-          transform: "translateY(-50%)",
-          color: "#28a745",
-        }}
-      />
-      <input
-        type="text"
-        placeholder="Search by title, category, or price"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="form-control border-0 ps-5 rounded-4"
-        style={{
-          minWidth: "250px",
-          background: "transparent",
-          boxShadow: "none",
-        }}
-      />
-    </div>
-    <Button
-      variant="success"
-      className="rounded-4 px-3 d-flex align-items-center gap-2"
-      onClick={handleSearch}
-    >
-      <FaSearch /> Search
-    </Button>
-    <Button
-      variant="outline-success"
-      className="rounded-4 px-3 d-flex align-items-center gap-2"
-      onClick={handleClearSearch}
-    >
-      <FaTimes /> Clear
-    </Button>
-  </div>
-
-  <div className="d-flex gap-2 align-items-center bg-white p-2 rounded-4 shadow-sm">
-    <select
-      value={sortOption}
-      onChange={(e) => setSortOption(e.target.value)}
-      className="form-select border-0 rounded-4"
-      style={{ minWidth: "200px" }}
-    >
-      <option value="">Sort By</option>
-      <option value="title,asc"> Title ↑ (A-Z)</option>
-      <option value="title,desc"> Title ↓ (Z-A)</option>
-      <option value="price,asc"> Price ↑ (Low → High)</option>
-      <option value="price,desc">Price ↓ (High → Low)</option>
-      <option value="category,asc">Category ↑ (A-Z)</option>
-      <option value="category,desc"> Category ↓ (Z-A)</option>
-    </select>
-    <Button
-      variant="success"
-      className="rounded-4 px-3 d-flex align-items-center gap-2"
-      onClick={handleSort}
-    >
-      <FaSort /> Sort
-    </Button>
-  </div>
-</div>
+   
+        <div className="d-flex gap-2 align-items-center bg-white p-2 rounded-4 shadow-sm">
+          <select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+            className="form-select border-0 rounded-4"
+            style={{ minWidth: "200px" }}
+          >
+            <option value="">Sort By</option>
+            <option value="title,asc"> Title ↑ (A-Z)</option>
+            <option value="title,desc"> Title ↓ (Z-A)</option>
+            <option value="price,asc"> Price ↑ (Low → High)</option>
+            <option value="price,desc"> Price ↓ (High → Low)</option>
+            <option value="category,asc">Category ↑ (A-Z)</option>
+            <option value="category,desc"> Category ↓ (Z-A)</option>
+            <option value="brand,asc">Brand ↑ (A-Z)</option>
+            <option value="brand,desc">Brand ↓ (Z-A)</option>
+          </select>
+          <Button
+            variant="success"
+            className="rounded-4 px-3 d-flex align-items-center gap-2"
+            onClick={handleSort}
+          >
+            <FaSort /> Sort
+          </Button>
+        </div>
+      </div>
 
       <div style={{ marginBottom: "30px" }}>
         <img
@@ -179,12 +181,11 @@ const Home = () => {
           }}
         />
       </div>
-<Categories/>
+
+      <Categories />
       <Container>
-        
         <ProductCard />
         <RollingPaperTobacco />
-       
 
         <h2 className="mb-4 text-center fw-bold text-success">All Products</h2>
 
@@ -211,13 +212,20 @@ const Home = () => {
                       <Card.Title className="fw-bold fs-6 text-success">
                         {prod.title}
                       </Card.Title>
-                      <Card.Text className="text-muted small">
-                        {prod.desc}
-                      </Card.Text>
+                      <Card.Text className="text-muted small">{prod.desc}</Card.Text>
+
                       <p className="mb-1 text-success">
                         <strong>₹{prod.price}</strong>
                       </p>
                       <p className="mb-0 text-secondary">{prod.category}</p>
+
+                 
+                      <p className="mb-0 text-dark small">
+                        <strong>Brand:</strong> {prod.brand || "N/A"}
+                      </p>
+                      <p className={`mb-0 small ${prod.stock > 0 ? "text-success" : "text-danger"}`}>
+                        <strong>Stock:</strong> {prod.stock > 0 ? prod.stock : "Out of stock"}
+                      </p>
                     </Card.Body>
                     <Card.Footer className="d-flex justify-content-between bg-white border-0 pt-2">
                       <Button
@@ -249,7 +257,7 @@ const Home = () => {
               ))}
             </Row>
 
-       
+        
             {pageCount > 1 && (
               <div className="d-flex justify-content-center mt-4">
                 <ReactPaginate
@@ -275,53 +283,53 @@ const Home = () => {
         )}
       </Container>
 
+   
+      <Modal show={showModal} onHide={handleClose} centered size="lg" className="product-modal">
+        <Modal.Header closeButton className="product-modal-header">
+          <Modal.Title className="product-modal-title">
+            <i className="fas fa-box me-2"></i> Product Details
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="p-4">
+          {selectedProduct && (
+            <div className="product-modal-container">
+              <div className="row g-4 align-items-center">
+                <div className="col-md-6 text-center">
+                  <div className="product-modal-image-container">
+                    <img
+                      src={selectedProduct.image}
+                      alt={selectedProduct.title}
+                      className="img-fluid rounded shadow"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="product-modal-info">
+                    <h2 className="product-modal-name fw-bold">{selectedProduct.title}</h2>
+                    <Badge pill bg="success" className="product-modal-category mb-3">
+                      {selectedProduct.category}
+                    </Badge>
+                    <h3 className="product-modal-price text-success fw-bold">
+                      ₹{selectedProduct.price}
+                    </h3>
 
-<Modal
-  show={showModal}
-  onHide={handleClose}
-  centered
-  size="lg"
-  className="product-modal"
->
-  <Modal.Header closeButton className="product-modal-header">
-    <Modal.Title className="product-modal-title">
-      <i className="fas fa-box me-2"></i> Product Details
-    </Modal.Title>
-  </Modal.Header>
-  <Modal.Body className="p-4">
-    {selectedProduct && (
-      <div className="product-modal-container">
-        <div className="row g-4 align-items-center">
-          <div className="col-md-6 text-center">
-            <div className="product-modal-image-container">
-              <img
-                src={selectedProduct.image}
-                alt={selectedProduct.title}
-                className="img-fluid rounded shadow"
-              />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="product-modal-info">
-              <h2 className="product-modal-name fw-bold">{selectedProduct.title}</h2>
-              <Badge pill bg="success" className="product-modal-category mb-3">
-                {selectedProduct.category}
-              </Badge>
-              <h3 className="product-modal-price text-success fw-bold">
-                ₹{selectedProduct.price}
-              </h3>
-              <div className="product-modal-description mt-3">
-                <h5 className="fw-semibold">Description</h5>
-                <p className="text-muted">{selectedProduct.desc}</p>
+                  
+                    <p className="mt-2 mb-1"><strong>Brand:</strong> {selectedProduct.brand || "N/A"}</p>
+                    <p className={`mb-3 ${selectedProduct.stock > 0 ? "text-success" : "text-danger"}`}>
+                      <strong>Stock:</strong> {selectedProduct.stock > 0 ? selectedProduct.stock : "Out of stock"}
+                    </p>
+
+                    <div className="product-modal-description mt-3">
+                      <h5 className="fw-semibold">Description</h5>
+                      <p className="text-muted">{selectedProduct.desc}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    )}
-  </Modal.Body>
-</Modal>
-
+          )}
+        </Modal.Body>
+      </Modal>
     </>
   );
 };
