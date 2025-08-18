@@ -18,8 +18,8 @@ const AddProduct = () => {
     title: "",
     desc: "",
     price: "",
-      brand: "",   
-  stock: "",  
+    Amount: "",   
+    Quantity : "",  
     category: "",
     image: "",
   };
@@ -48,8 +48,8 @@ const AddProduct = () => {
     if (!inputForm.category || inputForm.category === "Select Category")
       newErrors.category = "Please select a valid category";
     if (!inputForm.image.trim()) newErrors.image = "Image URL is required";
-      if (!inputForm.brand.trim()) newErrors.brand = "Brand is required"; 
-  if (!inputForm.stock) newErrors.stock = "Stock is required"; 
+      if (!inputForm.Amount.trim()) newErrors.brand = "Amount is required"; 
+  if (!inputForm.Quantity) newErrors.stock = "Quantity is required"; 
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -154,36 +154,36 @@ const AddProduct = () => {
         </Form.Group>
    
                 <Form.Group as={Row} className="mb-3">
-                  <Form.Label column sm="2">Brand</Form.Label>
+                  <Form.Label column sm="2">Amount</Form.Label>
                   <Col sm="10">
                     <Form.Control
                       type="text"
-                      placeholder="Enter Brand Name"
-                      name="brand"
-                      value={inputForm.brand}
+                      placeholder="Enter Amount"
+                      name="Amount"
+                      value={inputForm.Amount}
                       onChange={handleChanged}
-                      isInvalid={!!errors.brand}
+                      isInvalid={!!errors.Amount}
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.brand}
+                      {errors.Amount}
                     </Form.Control.Feedback>
                   </Col>
                 </Form.Group>
 
         
                 <Form.Group as={Row} className="mb-3">
-                  <Form.Label column sm="2">Stock</Form.Label>
+                  <Form.Label column sm="2">Quantity</Form.Label>
                   <Col sm="10">
                     <Form.Control
                       type="number"
-                      placeholder="Enter Stock Quantity"
-                      name="stock"
-                      value={inputForm.stock}
+                      placeholder="Enter  Quantity"
+                      name="Quantity"
+                      value={inputForm.Quantity}
                       onChange={handleChanged}
-                      isInvalid={!!errors.stock}
+                      isInvalid={!!errors.Quantity}
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.stock}
+                      {errors.Quantity}
                     </Form.Control.Feedback>
                   </Col>
                 </Form.Group>

@@ -221,10 +221,10 @@ const Home = () => {
 
                  
                       <p className="mb-0 text-dark small">
-                        <strong>Brand:</strong> {prod.brand || "N/A"}
+                        <strong>Amount:</strong> {prod.Amount || "N/A"}
                       </p>
-                      <p className={`mb-0 small ${prod.stock > 0 ? "text-success" : "text-danger"}`}>
-                        <strong>Stock:</strong> {prod.stock > 0 ? prod.stock : "Out of stock"}
+                      <p className={`mb-0 small ${prod.Quantity > 0 ? "text-success" : "text-danger"}`}>
+                        <strong>Quantity:</strong> {prod.Quantity > 0 ? prod.Quantity : "Out of stock"}
                       </p>
                     </Card.Body>
                     <Card.Footer className="d-flex justify-content-between bg-white border-0 pt-2">
@@ -314,9 +314,9 @@ const Home = () => {
                     </h3>
 
                   
-                    <p className="mt-2 mb-1"><strong>Brand:</strong> {selectedProduct.brand || "N/A"}</p>
-                    <p className={`mb-3 ${selectedProduct.stock > 0 ? "text-success" : "text-danger"}`}>
-                      <strong>Stock:</strong> {selectedProduct.stock > 0 ? selectedProduct.stock : "Out of stock"}
+                    <p className="mt-2 mb-1"><strong>Amount:</strong> {selectedProduct.Amount || "N/A"}</p>
+                    <p className={`mb-3 ${selectedProduct.Amount > 0 ? "text-success" : "text-danger"}`}>
+                      <strong>Quantity:</strong> {selectedProduct.Quantity > 0 ? selectedProduct.Quantity: "Out of stock"}
                     </p>
 
                     <div className="product-modal-description mt-3">
