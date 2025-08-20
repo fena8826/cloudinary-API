@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { FaCheck } from "react-icons/fa";
 import { getProductAsync, updateProductAsync } from "../Services/Actions/productAction";
-import { uploadImage } from "../Services/imageUpload"; 
+import { uploadImage } from "../Services/imageUpload";
 import "./EditProduct.css";
 
 const EditProduct = () => {
@@ -19,13 +19,8 @@ const EditProduct = () => {
     desc: "",
     price: "",
     category: "",
-<<<<<<< HEAD
     Amount: "",
     Quantity: "",
-=======
-      Amount: "",  
-  Quantity: "",
->>>>>>> 64366204de98d6d34af312e55986aa4001c17cac
     image: "",
   };
 
@@ -88,15 +83,9 @@ const EditProduct = () => {
     if (!inputForm.price) newErrors.price = "Price is required";
     if (!inputForm.category || inputForm.category === "Select Category")
       newErrors.category = "Please select a valid category";
-<<<<<<< HEAD
     if (!inputForm.image.trim()) newErrors.image = "Image is required";
     if (!inputForm.Amount.trim()) newErrors.Amount = "Amount is required";
     if (!inputForm.Quantity) newErrors.Quantity = "Quantity is required";
-=======
-    if (!inputForm.image.trim()) newErrors.image = "Image URL is required";
-      if (!inputForm.Amount.trim()) newErrors.brand = "Amount is required"; 
-  if (!inputForm.Quantity) newErrors.Quantity = "Stock is required"; 
->>>>>>> 64366204de98d6d34af312e55986aa4001c17cac
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -184,7 +173,6 @@ const EditProduct = () => {
           </Col>
         </Form.Group>
 
-<<<<<<< HEAD
 
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Amount</Form.Label>
@@ -218,37 +206,6 @@ const EditProduct = () => {
         </Form.Group>
 
       
-=======
-<Form.Group as={Row} className="mb-3">
-  <Form.Label column sm="2">Amount</Form.Label>
-  <Col sm="10">
-    <Form.Control
-      type="text"
-      placeholder="Enter Amount "
-      name="Amount"
-      value={inputForm.Amount}
-      onChange={handleChanged}
-      isInvalid={!!errors.Amount}
-    />
-    <Form.Control.Feedback type="invalid">{errors.Amount}</Form.Control.Feedback>
-  </Col>
-</Form.Group>
-
-<Form.Group as={Row} className="mb-3">
-  <Form.Label column sm="2">Quantity</Form.Label>
-  <Col sm="10">
-    <Form.Control
-      type="number"
-      placeholder="Enter  Quantity"
-      name="Quantity"
-      value={inputForm.Quantity}
-      onChange={handleChanged}
-      isInvalid={!!errors.Quantity}
-    />
-    <Form.Control.Feedback type="invalid">{errors.Quantity}</Form.Control.Feedback>
-  </Col>
-</Form.Group>
->>>>>>> 64366204de98d6d34af312e55986aa4001c17cac
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Image</Form.Label>
           <Col sm="10">
@@ -258,16 +215,9 @@ const EditProduct = () => {
               onChange={handleFileChanged}
               isInvalid={!!errors.image}
             />
-            <Form.Control.Feedback type="invalid">{errors.image}</Form.Control.Feedback>
+           
 
-
-            {inputForm.image && (
-              <img
-                src={inputForm.image}
-                alt="Current"
-                style={{ width: "100px", marginTop: "10px", borderRadius: "5px" }}
-              />
-            )}
+        
           </Col>
         </Form.Group>
 
