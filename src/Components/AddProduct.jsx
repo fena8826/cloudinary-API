@@ -13,6 +13,7 @@ const AddProduct = () => {
   const navigate = useNavigate();
 
   const { isCreated, isError } = useSelector((state) => state.productReducer);
+  const { user } = useSelector((state) => state.userReducer); 
 
   const initialState = {
     id: "",
@@ -41,7 +42,6 @@ const AddProduct = () => {
     }));
   };
 
- 
   const handleFileChanged = async (e) => {
     if (e.target.files && e.target.files[0]) {
       try {
@@ -86,11 +86,19 @@ const AddProduct = () => {
     dispatch(addProductAsync(inputForm));
   };
 
+  // ✅ Redirect after product creation
   useEffect(() => {
     if (isCreated) {
       navigate("/");
     }
-  }, [isCreated]);
+  }, [isCreated, navigate]);
+
+  // ✅ Redirect if user not logged in
+  useEffect(() => {
+    if (!user) {
+      navigate("/signIn");
+    }
+  }, [user, navigate]);
 
   return (
     <Container className="add-product-container">
@@ -99,7 +107,7 @@ const AddProduct = () => {
       {isError && <p className="text-danger">{isError}</p>}
 
       <Form className="mt-4" onSubmit={handleSubmit}>
-   
+
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Title</Form.Label>
           <Col sm="10">
@@ -117,7 +125,6 @@ const AddProduct = () => {
           </Col>
         </Form.Group>
 
-    
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Description</Form.Label>
           <Col sm="10">
@@ -135,7 +142,6 @@ const AddProduct = () => {
           </Col>
         </Form.Group>
 
-      
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Price</Form.Label>
           <Col sm="10">
@@ -153,7 +159,6 @@ const AddProduct = () => {
           </Col>
         </Form.Group>
 
-        
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Category</Form.Label>
           <Col sm="10">
@@ -177,7 +182,6 @@ const AddProduct = () => {
           </Col>
         </Form.Group>
 
-
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Amount</Form.Label>
           <Col sm="10">
@@ -194,7 +198,6 @@ const AddProduct = () => {
             </Form.Control.Feedback>
           </Col>
         </Form.Group>
-
 
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Quantity</Form.Label>
@@ -213,7 +216,6 @@ const AddProduct = () => {
           </Col>
         </Form.Group>
 
-
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Image</Form.Label>
           <Col sm="10">
@@ -223,8 +225,9 @@ const AddProduct = () => {
               onChange={handleFileChanged}
               isInvalid={!!errors.image}
             />
-           
-          
+            <Form.Control.Feedback type="invalid">
+              {errors.image}
+            </Form.Control.Feedback>
           </Col>
         </Form.Group>
 

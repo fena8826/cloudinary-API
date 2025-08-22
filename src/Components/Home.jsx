@@ -115,7 +115,7 @@ const Home = () => {
             />
             <input
               type="text"
-              placeholder="Search by title, category, brand, or price"
+              placeholder="Search by title, category, brand , or price"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="form-control border-0 ps-5 rounded-4"
@@ -235,13 +235,13 @@ const Home = () => {
                       >
                         Edit
                       </Button>
-                      <Button
-                        variant="success"
-                        size="sm"
-                        onClick={() => handleDelete(prod.id)}
-                      >
-                        Delete
-                      </Button>
+                  <Button 
+                      variant="success"
+                      size="sm"
+                      onClick={() => handleDelete(prod.id)}
+                    >
+                      Delete
+                    </Button>
                       <Button
                         variant="info"
                         size="sm"

@@ -12,6 +12,7 @@ const EditProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { product, isUpdated } = useSelector((state) => state.productReducer);
+  const { user } = useSelector((state) => state.userReducer);
 
   const initialState = {
     id: "",
@@ -27,11 +28,13 @@ const EditProduct = () => {
   const [inputForm, setInputForm] = useState(initialState);
   const [errors, setErrors] = useState({});
 
+
   useEffect(() => {
     if (id) {
       dispatch(getProductAsync(id));
     }
   }, [id, dispatch]);
+
 
   useEffect(() => {
     if (product) {
@@ -39,11 +42,18 @@ const EditProduct = () => {
     }
   }, [product]);
 
+
   useEffect(() => {
     if (isUpdated) {
       navigate("/");
     }
   }, [isUpdated, navigate]);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/signIn");
+    }
+  }, [user, navigate]);
 
   const handleChanged = (e) => {
     const { name, value } = e.target;
@@ -56,7 +66,6 @@ const EditProduct = () => {
       [name]: "",
     }));
   };
-
 
   const handleFileChanged = async (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -103,7 +112,6 @@ const EditProduct = () => {
       <h1 className="edit-product-title">Edit Product</h1>
 
       <Form className="mt-4" onSubmit={handleSubmit}>
-       
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Title</Form.Label>
           <Col sm="10">
@@ -118,7 +126,6 @@ const EditProduct = () => {
             <Form.Control.Feedback type="invalid">{errors.title}</Form.Control.Feedback>
           </Col>
         </Form.Group>
-
 
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Description</Form.Label>
@@ -135,7 +142,6 @@ const EditProduct = () => {
           </Col>
         </Form.Group>
 
- 
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Price</Form.Label>
           <Col sm="10">
@@ -151,7 +157,6 @@ const EditProduct = () => {
           </Col>
         </Form.Group>
 
-      
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Category</Form.Label>
           <Col sm="10">
@@ -173,7 +178,6 @@ const EditProduct = () => {
           </Col>
         </Form.Group>
 
-
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Amount</Form.Label>
           <Col sm="10">
@@ -189,7 +193,6 @@ const EditProduct = () => {
           </Col>
         </Form.Group>
 
-      
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Quantity</Form.Label>
           <Col sm="10">
@@ -205,7 +208,6 @@ const EditProduct = () => {
           </Col>
         </Form.Group>
 
-      
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm="2">Image</Form.Label>
           <Col sm="10">
@@ -215,9 +217,6 @@ const EditProduct = () => {
               onChange={handleFileChanged}
               isInvalid={!!errors.image}
             />
-           
-
-        
           </Col>
         </Form.Group>
 
