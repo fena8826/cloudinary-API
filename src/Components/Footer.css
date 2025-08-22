@@ -1,123 +1,67 @@
 .footer {
-  font-size: 14px;
-  color: #333;
+    padding-top: 48px;
+    font-size: 14px;
+    line-height: 1.6;
 }
 
-.footer h6 {
-  font-size: 16px;
-  margin-bottom: 12px;
+.footer a {
+    color: gray;
+    text-decoration: none;
 }
 
-.footer-links li {
-  margin-bottom: 6px;
-  cursor: pointer;
+.footer h5 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #000;
 }
 
-.footer-links li:hover {
-  color: green;
+.footer ul {
+    padding-left: 0 !important;
+    margin-left: 0;
+    list-style: none;
+    text-align: left;
 }
 
-.see-all {
-  color: green;
-  font-size: 14px;
-  cursor: pointer;
+.footer ul li {
+    margin-bottom: 8px;
+    text-align: left;
 }
 
-.store-badge {
-  height: 40px;
-  margin: 5px;
+.footer .social-icon {
+    font-size: 30px;
+    margin-left: 12px;
+    background: #000;
+    color: #fff;
+    transition: color 0.3s ease;
+    padding: 5px;
+    border-radius: 50%;
+  
+
 }
 
-.social-icons svg {
-  font-size: 20px;
-  margin: 0 6px;
-  cursor: pointer;
-  transition: 0.3s;
+.footer .social-icon:hover {
+    color: #54b226 !important;
 }
 
-.social-icons svg:hover {
-  color: green;
-}
-.footer {
-  background: #f9f9f9;
-  padding: 40px 60px;
-  font-size: 14px;
-  color: #333;
+.footer .social-icon:hover {
+    color: #000;
 }
 
-.footer-top {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 Columns */
-  gap: 20px;
-  margin-bottom: 30px;
-}
+@media (max-width: 768px) {
+    .footer h5 {
+        text-align: center;
+    }
 
-.footer h6 {
-  font-size: 16px;
-  margin-bottom: 12px;
-  font-weight: bold;
-}
+    .footer .social-icon {
+        margin: 0 6px;
+    }
 
-.footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+    .footer p {
+        text-align: center !important;
+    }
 
-.footer-links li {
-  margin-bottom: 6px;
-  cursor: pointer;
-}
-
-.footer-links li:hover {
-  color: green;
-}
-
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  border-top: 1px solid #ddd;
-  padding-top: 15px;
-  margin-top: 20px;
-}
-
-.download-app {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.download-app span {
-  font-weight: bold;
-  margin-bottom: 6px;
-}
-
-.store-badge {
-  height: 40px;
-  margin: 5px;
-}
-
-.social-icons {
-  display: flex;
-  align-items: center;
-}
-
-.social-icons svg {
-  font-size: 20px;
-  margin: 0 6px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.social-icons svg:hover {
-  color: green;
-}
-
-.footer-note {
-  margin-top: 20px;
-  font-size: 12px;
-  color: #777;
-  line-height: 1.4;
+    .footer .text-md-end {
+        text-align: center !important;
+   }
 }
